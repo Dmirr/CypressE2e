@@ -1,0 +1,46 @@
+{
+  "name": "cypresse2e",
+  "version": "1.0.0",
+  "description": "cypress e2e tests",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "npx cypress open",
+    "cy:dashboard": "cypress run --record --key cabf7cef-dae1-42be-b740-dbc679e89e38",
+    "cy:spec1": "cypress run --spec 'cypress/e2e/Test/login.feature' --record --key cabf7cef-dae1-42be-b740-dbc679e89e38",
+    "cy:spec2": "cypress run --spec 'cypress/e2e/Test/login_copy.feature' --record --key cabf7cef-dae1-42be-b740-dbc679e89e38",
+    "cy:nokey:spec1": "cypress run --spec 'cypress/e2e/Test/login.feature'",
+    "cy:nokey:spec2": "cypress run --spec 'cypress/e2e/Test/login_copy.feature'",
+    "cy:parallel": "npm run cy:spec1 -- --browser chrome --group CHrome --ci-build-id 9 --parallel & npm run cy:spec2 -- --browser electron --group Electron --ci-build-id 9 --parallel",
+    "cy:run": "cypress run",
+    "cy:norecord:parallel": "npm run cy:nokey:spec1 -- --browser chrome & npm run cy:nokey:spec2 -- --browser electron",
+    "allure:report": "allure generate allure-results --clean -o allure-report",
+    "clear:allure": "rm -r allure-results/ allure-report cypress/screenshots || true",
+    "allure:open": "allure open allure-report",
+    "run:allure": "npm run cy:run & npm run allure:report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dmirr/CypressE2e.git"
+  },
+  "keywords": [
+    "Cypress",
+    "e2e",
+    "test"
+  ],
+  "author": "Dmirr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dmirr/CypressE2e/issues"
+  },
+  "homepage": "https://github.com/Dmirr/CypressE2e#readme",
+  "devDependencies": {
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
+    "@faker-js/faker": "^7.6.0",
+    "@shelex/cypress-allure-plugin": "^2.40.0",
+    "cypress": "^12.13.0",
+    "esbuild": "^0.17.19"
+  },
+  "dependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^17.2.1"
+  }
+}
